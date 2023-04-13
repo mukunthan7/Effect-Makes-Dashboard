@@ -67,7 +67,6 @@ export default function AppliedList() {
   );
 
 
-
   return (
     <div>
       <div>
@@ -86,8 +85,25 @@ export default function AppliedList() {
           <MaterialReactTable
             columns={columns}
             data={appliedList}
-            tableRef={tableRef}
           />
+       <table hidden ref={tableRef} className="table-auto">
+            <thead>
+              <tr>
+                {columns.map((column) => (
+                  <th key={column.header} className="px-4 py-2">{column.header}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {appliedList.map((row) => (
+                <tr key={row.sno}>
+                  {columns.map((column) => (
+                    <td key={column.accessorKey} className="border px-4 py-2">{row[column.accessorKey]}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

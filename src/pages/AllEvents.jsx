@@ -62,7 +62,7 @@ export default function AllEvents() {
           <div className='flex justify-between items-center px-3 mb-5'>
           <h1 className='font-bold text-md md:text-xl'>All Events Table</h1>
           <DownloadTableExcel
-            filename={`Applied List ${new Date().toLocaleDateString()}`} 
+            filename={`All Events ${new Date().toLocaleDateString()}`} 
             sheet="users"
             currentTableRef={tableRef.current}
           >
@@ -72,8 +72,25 @@ export default function AllEvents() {
           <MaterialReactTable
             columns={columns}
             data={allEvents}
-            tableRef={tableRef}
           />
+          <table hidden ref={tableRef} className="table-auto">
+            <thead>
+              <tr>
+                {columns.map((column) => (
+                  <th className="px-4 py-2">{column.header}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {allEvents.map((row) => (
+                <tr>
+                  {columns.map((column) => (
+                    <td className="border px-4 py-2">{row[column.accessorKey]}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
